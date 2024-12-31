@@ -6,7 +6,8 @@ var studentId = Guid.Parse("410efa39-917b-45d4-83ff-f9a618d760a3");
 
 while (true)
 {
-    Console.WriteLine("Choose an option:");
+
+    Console.WriteLine("\r\n--------------\r\nChoose an option\r\n--------------");
     Console.WriteLine("1. Create Student");
     Console.WriteLine("2. Enroll Student in Course");
     Console.WriteLine("3. Update Student Information");
@@ -16,15 +17,16 @@ while (true)
 
     Console.WriteLine("0. Exit");
     var choice = Console.ReadLine();
-
+    Console.Clear();
+   
     switch (choice)
     {
         case "1":
             var studentCreated = new StudentCreated
             {
                 StudentId = studentId,
-                Email = "nick@dometrain.com",
-                FullName = "Nick Chapsas",
+                Email = "nick.smith@xyz.com",
+                FullName = "Nick Smith",
                 DateOfBirth = new DateTime(1993, 1, 1)
             };
             await studentDatabase.AppendAsync(studentCreated);
@@ -35,7 +37,7 @@ while (true)
             var studentEnrolled = new StudentEnrolled
             {
                 StudentId = studentId,
-                CourseName = "From Zero to Hero: REST APIs in .NET"
+                CourseName = "EDA, CRUD and REST APIs in .NET"
             };
             await studentDatabase.AppendAsync(studentEnrolled);
             Console.WriteLine($"Student Enrolled: {studentEnrolled.CourseName}");
@@ -45,8 +47,8 @@ while (true)
             var studentUpdated = new StudentUpdated
             {
                 StudentId = studentId,
-                Email = "nickchapsas@dometrain.com",
-                FullName = "Nick Chapsas"
+                Email = "nick.smith@xyz.com",
+                FullName = "Nick Smith"
             };
             await studentDatabase.AppendAsync(studentUpdated);
             Console.WriteLine($"Student Updated: {studentUpdated.FullName}, {studentUpdated.Email}");
