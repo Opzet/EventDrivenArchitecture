@@ -1,6 +1,9 @@
-﻿namespace UserRegistration.Domain.Events
+﻿using UserRegistration.Attributes;
+
+namespace UserRegistration.Domain.Events
 {
     // Event representing a user registration
+    [EventMetadata("UserRegisteredEvent", "Event triggered when a user registers.")]
     public class UserRegisteredEvent : IEvent
     {
         public Guid Id

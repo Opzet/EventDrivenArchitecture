@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Attributes\" />
+    <Folder Include="Documentation\" />
   </ItemGroup>
 
 </Project>
