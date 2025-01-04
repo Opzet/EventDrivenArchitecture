@@ -6,8 +6,13 @@ A clean and automated way to update Event Sourcing documentation for your event 
 ## Try .NET for Interactive Documentation for .NET Core Applications
 
 ``` 
-dotnet tool install --global dotnet-try
+
+dotnet tool install -g --add-source "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet-tools/nuget/v3/index.json" Microsoft.dotnet-try
+
 ```
+
+see https://github.com/dotnet/try/blob/main/DotNetTryLocal.md
+
 Try .NET is an interactive documentation generator for .NET Core
 
  --version 1.0.19266.1 Updating to the latest version of the tool is easy just run the command below dotnet tool update -g dotnet-try * Navigate to the Samples directory of this repository and, type the following dotnet try. dotnet try global tool, image * This will launch the browser. Interactive .NET documentation, image
