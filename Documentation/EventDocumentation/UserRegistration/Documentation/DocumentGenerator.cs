@@ -13,26 +13,94 @@ namespace UserRegistration.Infrastructure
 
         private static void GenerateDocumentationStructure()
         {
-            // Structure of the Event Catalog folders which will be filled ReGenerateMDXDocumentation
-            // The structure of the generated code will follow eventcatalog conventions 
+            // The structure of the generated code will follow event catalog conventions 
 
-            // Create a c# generator to match
-            //  ```npm
-            //  > npx @eventcatalog/create-eventcatalog@latest my-event-catalog
-            //  > Need to install the following packages:
-            //  > @eventcatalog / create - eventcatalog@2.2.0
-            //  > Ok to proceed ? (y)y
-            // Installing dependencies:
-            //  > -@eventcatalog / core
-            //  > 
-            // ```
+            // List of folders to be created based on the event catalog structure
+            List<string> EventCatalogFolders = new List<string>
+            {
+                "channels",
+                        // {name}.{env}.events folders
+                        // {name}.md
+                "components",
+                "domains",
+                        // {name}\
+                        // File -> changelog.md
+                        // File -> ubiquitous-language.
 
+                        // {name}\services
+                        // {name}\{name}Services\
+                        // {name}\versioned
+                        
+                        // {name}\versioned\{version}
+                         // File -> index.md
+                "pages",
+                "public",
+                "teams",
+                "users"
+            };
+
+            var eventTypes = Assembly.GetExecutingAssembly().GetTypes()
+              .Where(t => typeof(IEvent).IsAssignableFrom(t) && t.GetCustomAttribute<EventMetadataAttribute>() != null);
+
+
+            string AppFolder = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            string BaseDirectory = Path.Combine(AppFolder, "Documentation-EventCatalog");
+
+            Directory.CreateDirectory(BaseDirectory);
+
+
+            foreach (var eventType in eventTypes)
+            {
+                var attribute = eventType.GetCustomAttribute<EventMetadataAttribute>();
+            if (attribute != null)
+            {
+                string domainFolder = Path.Combine(BaseDirectory, "domains", attribute.Name);
+                Directory.CreateDirectory(domainFolder);
+
+                    string servicesFolder = Path.Combine(domainFolder, "services");
+                    Directory.CreateDirectory(servicesFolder);
+
+
+                Directory.CreateDirectory(Path.Combine(domainFolder, "versioned"));
+                File.WriteAllText(Path.Combine(domainFolder, "changelog.md"), string.Empty);
+                File.WriteAllText(Path.Combine(domainFolder, "index.md"), string.Empty);
+                File.WriteAllText(Path.Combine(domainFolder, "ubiquitous-language.md"), string.Empty);
+
+                string serviceFolder = Path.Combine(domainFolder, "services", $"{attribute.Name}Service");
+                Directory.CreateDirectory(serviceFolder);
+                Directory.CreateDirectory(Path.Combine(serviceFolder, "events"));
+                Directory.CreateDirectory(Path.Combine(serviceFolder, "commands"));
+                Directory.CreateDirectory(Path.Combine(serviceFolder, "queries"));
+                Directory.CreateDirectory(Path.Combine(serviceFolder, "versioned"));
+                File.WriteAllText(Path.Combine(serviceFolder, "changelog.md"), string.Empty);
+                File.WriteAllText(Path.Combine(serviceFolder, "index.md"), string.Empty);
+
+                string eventFolder = Path.Combine(serviceFolder, "events", eventType.Name);
+                Directory.CreateDirectory(eventFolder);
+                Directory.CreateDirectory(Path.Combine(eventFolder, "versioned"));
+                File.WriteAllText(Path.Combine(eventFolder, "changelog.md"), string.Empty);
+                File.WriteAllText(Path.Combine(eventFolder, "index.md"), string.Empty);
+                File.WriteAllText(Path.Combine(eventFolder, "schema.json"), string.Empty);
+            }
+
+            foreach ( var folder in EventCatalogFolders)
+            {
+                Directory.CreateDirectory(Path.Combine(BaseDirectory, folder));
+            }
+
+        }
 
         }
 
         public static void ReGenerateMDXDocumentation()
         {
+        
             GenerateDocumentationStructure();
+
+
+
+            // Create a c# generator to ensure that your event schemas are automatically documented in MDX format,
+            // which can be interpreted by tools like EventCatalog.
 
             var eventTypes = Assembly.GetExecutingAssembly().GetTypes()
               .Where(t => typeof(IEvent).IsAssignableFrom(t) && t.GetCustomAttribute<EventMetadataAttribute>() != null);
