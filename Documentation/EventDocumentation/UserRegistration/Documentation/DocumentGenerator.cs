@@ -10,6 +10,10 @@ namespace UserRegistration.Infrastructure
 {
     public static class DocumentationGenerator
     {
+        // EventCatalog provides a set of scripts to help you generate, serve, and deploy your catalog.
+
+        // This Documentation Generator generates event MDX documentation in event catalog mdx convention from applications C# source code 
+        // This structure is consumbed by 'eventcatalog build' command to bootstrap the catalog that is viewable using the EventCatalog web interface
 
         private static void GenerateDocumentationStructure()
         {
@@ -48,48 +52,57 @@ namespace UserRegistration.Infrastructure
 
             Directory.CreateDirectory(BaseDirectory);
 
+            var commands = Assembly.GetExecutingAssembly().GetTypes()
+              .Where(t => typeof(IEvent).IsAssignableFrom(t) && t.GetCustomAttribute<CommandMetadataAttribute>() != null);
 
             foreach (var eventType in eventTypes)
             {
                 var attribute = eventType.GetCustomAttribute<EventMetadataAttribute>();
-            if (attribute != null)
-            {
-                string domainFolder = Path.Combine(BaseDirectory, "domains", attribute.Name);
-                Directory.CreateDirectory(domainFolder);
+                if (attribute != null)
+                {
+                    string domainFolder = Path.Combine(BaseDirectory, "domains", attribute.Name);
 
+                    // Create the domains folder + {name} folder
+                    Directory.CreateDirectory(domainFolder);
+
+                    //Create the services folder
                     string servicesFolder = Path.Combine(domainFolder, "services");
                     Directory.CreateDirectory(servicesFolder);
 
+                    //Create the {name}Service folder
+                    string serviceFolder = Path.Combine(domainFolder, "services", $"{attribute.Name}Service");
+                    Directory.CreateDirectory(serviceFolder);
 
-                Directory.CreateDirectory(Path.Combine(domainFolder, "versioned"));
-                File.WriteAllText(Path.Combine(domainFolder, "changelog.md"), string.Empty);
-                File.WriteAllText(Path.Combine(domainFolder, "index.md"), string.Empty);
-                File.WriteAllText(Path.Combine(domainFolder, "ubiquitous-language.md"), string.Empty);
+                    string commandsFolder = Path.Combine(serviceFolder, "commands");
+                    Directory.CreateDirectory(Path.Combine(serviceFolder, "commands"));
 
-                string serviceFolder = Path.Combine(domainFolder, "services", $"{attribute.Name}Service");
-                Directory.CreateDirectory(serviceFolder);
-                Directory.CreateDirectory(Path.Combine(serviceFolder, "events"));
-                Directory.CreateDirectory(Path.Combine(serviceFolder, "commands"));
-                Directory.CreateDirectory(Path.Combine(serviceFolder, "queries"));
-                Directory.CreateDirectory(Path.Combine(serviceFolder, "versioned"));
-                File.WriteAllText(Path.Combine(serviceFolder, "changelog.md"), string.Empty);
-                File.WriteAllText(Path.Combine(serviceFolder, "index.md"), string.Empty);
+                    // add command folders
+                    string command = 
+                    File.WriteAllText(Path.Combine(serviceFolder, "index.md"), string.Empty);
 
-                string eventFolder = Path.Combine(serviceFolder, "events", eventType.Name);
-                Directory.CreateDirectory(eventFolder);
-                Directory.CreateDirectory(Path.Combine(eventFolder, "versioned"));
-                File.WriteAllText(Path.Combine(eventFolder, "changelog.md"), string.Empty);
-                File.WriteAllText(Path.Combine(eventFolder, "index.md"), string.Empty);
-                File.WriteAllText(Path.Combine(eventFolder, "schema.json"), string.Empty);
+
+                    Directory.CreateDirectory(Path.Combine(serviceFolder, "events"));
+                    Directory.CreateDirectory(Path.Combine(serviceFolder, "queries"));
+                    Directory.CreateDirectory(Path.Combine(serviceFolder, "versioned"));
+                    File.WriteAllText(Path.Combine(serviceFolder, "changelog.md"), string.Empty);
+                    File.WriteAllText(Path.Combine(serviceFolder, "index.md"), string.Empty);
+
+                    Directory.CreateDirectory(Path.Combine(domainFolder, "versioned"));
+                    File.WriteAllText(Path.Combine(domainFolder, "changelog.md"), string.Empty);
+                    File.WriteAllText(Path.Combine(domainFolder, "index.md"), string.Empty);
+                    File.WriteAllText(Path.Combine(domainFolder, "ubiquitous-language.md"), string.Empty);
+
+
+
+                    string eventFolder = Path.Combine(serviceFolder, "events", eventType.Name);
+                    Directory.CreateDirectory(eventFolder);
+                    Directory.CreateDirectory(Path.Combine(eventFolder, "versioned"));
+                    File.WriteAllText(Path.Combine(eventFolder, "changelog.md"), string.Empty);
+                    File.WriteAllText(Path.Combine(eventFolder, "index.md"), string.Empty);
+                    File.WriteAllText(Path.Combine(eventFolder, "schema.json"), string.Empty);
+                }
+
             }
-
-            foreach ( var folder in EventCatalogFolders)
-            {
-                Directory.CreateDirectory(Path.Combine(BaseDirectory, folder));
-            }
-
-        }
-
         }
 
         public static void ReGenerateMDXDocumentation()
