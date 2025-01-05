@@ -15,7 +15,7 @@ namespace UserRegistration.Domain.Commands
     /// The RegisterUserCommand class encapsulates the data required to register a new user, including the user's name, email, and password.
     /// When this command is handled, it will result in an event (e.g., UserRegisteredEvent) that represents the successful registration of the user.
     /// </remarks>
-    [CommandMetadata("RegisterUser", "Command to register a new user.")]
+    [CommandMetadata(domain: "RegisterUser", name : "RegisterUser", "Command to register a new user.")]
     public class RegisterUserCommand
     {
         /// <summary>
