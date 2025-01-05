@@ -37,19 +37,21 @@ namespace UserRegistration
 
         private static void UpdateEventDocumentation()
         {
+            // EventCatalog provides a set of scripts to help you generate, serve, and deploy your catalog.
 
-            // Generate and save event documentation
-            var documentation = DocumentationGenerator.GenerateMarkdownDocumentation();
-            File.WriteAllText("EventDUserRegisteredEventocumentation.md", documentation);
+            // It does not generate and save event MDX documentation from application C# source code
+            // to be consumbed by 'eventcatalog build' command to bootstrap the catalog
+
+            DocumentationGenerator.ReGenerateMDXDocumentation();
+            
 
             
-            //EventCatalogSDK is assumed to be a tool or library that helps manage and update event schemas and documentation.
+            //EventCatalogSDK manage and update event schemas and documentation.
             //Its purpose is to facilitate the generation and maintenance of documentation for events in an event-driven system.
             var eventSchemas = EventSchemaRegistry.GetEventSchema("UserRegisteredEvent");
             if (eventSchemas != null)
             {
-                //EventCatalog provides a set of scripts to help you generate, serve, and deploy your catalog.
-
+                
                 // Once your catalog is bootstrapped, the source will contain the EventCatalog scripts that you can invoke with your package manager:
                 // Events are just markdown files
                 //eventcatalog build
