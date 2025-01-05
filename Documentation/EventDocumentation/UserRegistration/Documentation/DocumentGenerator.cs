@@ -12,14 +12,14 @@ namespace UserRegistration.Infrastructure
     {
         // EventCatalog provides a set of scripts to help you generate, serve, and deploy your catalog.
 
-        // This Documentation Generator generates event MDX documentation in event catalog mdx convention from applications C# source code 
-        // This structure is consumbed by 'eventcatalog build' command to bootstrap the catalog that is viewable using the EventCatalog web interface
+        // This Documentation Generator generates thisEvent MDX documentation in thisEvent catalog mdx convention from applications C# source code 
+        // This structure is consumbed by 'eventcatalog build' cmd to bootstrap the catalog that is viewable using the EventCatalog web interface
 
         private static void GenerateDocumentationStructure()
         {
-            // The structure of the generated code will follow event catalog conventions 
+            // The structure of the generated code will follow thisEvent catalog conventions 
 
-            // List of folders to be created based on the event catalog structure
+            // List of folders to be created based on the thisEvent catalog structure
             List<string> EventCatalogFolders = new List<string>
             {
                 "channels",
@@ -52,15 +52,45 @@ namespace UserRegistration.Infrastructure
 
             Directory.CreateDirectory(BaseDirectory);
 
+            string channelsFolder = Path.Combine(BaseDirectory, "channels");
+            Directory.CreateDirectory(channelsFolder);
+
+            string componentsFolder = Path.Combine(BaseDirectory, "components");
+            Directory.CreateDirectory(componentsFolder);
+            // To Do : Copy in footer.astro
+
+
+            string domainsFolder = Path.Combine(BaseDirectory, "domains");
+            Directory.CreateDirectory(domainsFolder);
+
+            string pagesFolder = Path.Combine(BaseDirectory, "pages");
+            Directory.CreateDirectory(pagesFolder);
+
+            string publicFolder = Path.Combine(BaseDirectory, "public");
+            Directory.CreateDirectory(publicFolder);
+            //Copy in logo.png
+
+            string teamsFolder = Path.Combine(BaseDirectory, "teams");
+            Directory.CreateDirectory(teamsFolder);
+            // Copy in team info
+
+            string usersFolder = Path.Combine(BaseDirectory, "users");
+            Directory.CreateDirectory(usersFolder);
+            // Copy in user info 
+
             var commands = Assembly.GetExecutingAssembly().GetTypes()
               .Where(t => typeof(IEvent).IsAssignableFrom(t) && t.GetCustomAttribute<CommandMetadataAttribute>() != null);
 
             foreach (var eventType in eventTypes)
             {
-                var attribute = eventType.GetCustomAttribute<EventMetadataAttribute>();
-                if (attribute != null)
+                var thisEvent = eventType.GetCustomAttribute<EventMetadataAttribute>();
+                if (thisEvent != null)
                 {
-                    string domainFolder = Path.Combine(BaseDirectory, "domains", attribute.Name);
+                    string channelFolder = Path.Combine(channelsFolder, $"{thisEvent.Name}.{{env}}.events");
+                    Directory.CreateDirectory(channelFolder);
+
+                    //create channel folder for thisEvent.{env}.events
+                    string domainFolder = Path.Combine(domainsFolder, thisEvent.Name);
 
                     // Create the domains folder + {name} folder
                     Directory.CreateDirectory(domainFolder);
@@ -70,15 +100,30 @@ namespace UserRegistration.Infrastructure
                     Directory.CreateDirectory(servicesFolder);
 
                     //Create the {name}Service folder
-                    string serviceFolder = Path.Combine(domainFolder, "services", $"{attribute.Name}Service");
+                    string serviceFolder = Path.Combine(domainFolder, "services", $"{thisEvent.Name}Service");
                     Directory.CreateDirectory(serviceFolder);
 
+                    // add command folder
                     string commandsFolder = Path.Combine(serviceFolder, "commands");
                     Directory.CreateDirectory(Path.Combine(serviceFolder, "commands"));
 
-                    // add command folders
-                    string command = 
-                    File.WriteAllText(Path.Combine(serviceFolder, "index.md"), string.Empty);
+                    // Add commands for this domain
+                    foreach (var cmd in commands)
+                    {
+                        var commandAttribute = cmd.GetCustomAttribute<CommandMetadataAttribute>();
+                        if (commandAttribute != null)
+                        {
+                            if (commandAttribute.Domain == thisEvent.Name)
+                            {
+
+                                string commandFolder = Path.Combine(commandsFolder, commandAttribute.Name);
+                                Directory.CreateDirectory(commandFolder);
+                                File.WriteAllText(Path.Combine(commandFolder, "index.md"), string.Empty);
+                                File.WriteAllText(Path.Combine(commandFolder, "schema.json"), string.Empty);
+                            }
+                        }
+                    }
+
 
 
                     Directory.CreateDirectory(Path.Combine(serviceFolder, "events"));
@@ -112,7 +157,7 @@ namespace UserRegistration.Infrastructure
 
 
 
-            // Create a c# generator to ensure that your event schemas are automatically documented in MDX format,
+            // Create a c# generator to ensure that your thisEvent schemas are automatically documented in MDX format,
             // which can be interpreted by tools like EventCatalog.
 
             var eventTypes = Assembly.GetExecutingAssembly().GetTypes()
@@ -156,14 +201,14 @@ namespace UserRegistration.Infrastructure
                     sb.AppendLine();
                 }
 
-                // Determine save location into Event Catalog Generated Documentation Directory Tree Structure
-                string EventCatalogLocation = eventType_location; // match into Generated Documentation Structure
+                //// Determine save location into Event Catalog Generated Documentation Directory Tree Structure
+                //string EventCatalogLocation = eventType_location; // match into Generated Documentation Structure
 
-                // Structure of the Event Catalog
-                string EventMDXDocument = eventType_filename + ".md"; //Event Catalog mdx (.md) file 
+                //// Structure of the Event Catalog
+                //string EventMDXDocument = eventType_filename + ".md"; //Event Catalog mdx (.md) file 
 
-                string SavedMdxAs = Path.Combine(EventCatalogLocation, EventMDXDocument);
-                File.WriteAllText(SavedMdxAs, sb.ToString());
+                //string SavedMdxAs = Path.Combine(EventCatalogLocation, EventMDXDocument);
+                //File.WriteAllText(SavedMdxAs, sb.ToString());
 
                 // Do a detailed report of  Event Catalog Generated Documentation Directory Tree Structure and files created or missing
                 // Maybe report stats like size or completeness, maybe a report detailing where extra detail is required

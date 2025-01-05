@@ -16,7 +16,7 @@ namespace UserRegistration.Domain.Commands
     /// When this command is handled, it will result in an event (e.g., UserRegisteredEvent) that represents the successful registration of the user.
     /// </remarks>
     [CommandMetadata(domain: "RegisterUser", name : "RegisterUser", "Command to register a new user.")]
-    public class RegisterUserCommand
+    public class AddUserCommand
     {
         /// <summary>
         /// Gets or sets the user name.
