@@ -118,8 +118,10 @@ namespace UserRegistration.Infrastructure
 
                                 string commandFolder = Path.Combine(commandsFolder, commandAttribute.Name);
                                 Directory.CreateDirectory(commandFolder);
-                                File.WriteAllText(Path.Combine(commandFolder, "index.md"), string.Empty);
-                                File.WriteAllText(Path.Combine(commandFolder, "schema.json"), string.Empty);
+
+                                CreateCommandIndexSchema(commandFolder, cmd);
+
+                              
                             }
                         }
                     }
@@ -148,6 +150,17 @@ namespace UserRegistration.Infrastructure
                 }
 
             }
+        }
+
+        private static void CreateCommandIndexSchema(string commandFolder, Type cmd)
+        {
+            // Create from the command metadata template / [template]-event-catalog directory
+            // TO DO : Compile from template
+           // var cmdIndexSchemaTemplate = File.ReadAllLines(templateCmdIndexSchema);
+
+
+            File.WriteAllText(Path.Combine(commandFolder, "index.md"), string.Empty);
+            File.WriteAllText(Path.Combine(commandFolder, "schema.json"), string.Empty);
         }
 
         public static void ReGenerateMDXDocumentation()
