@@ -1,0 +1,17 @@
+﻿<!--DSL Tools Language Template-->
+<VSTemplate Version="3.0.0" Type="Item" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+	<TemplateData>
+		<TemplateID>{a8213881-96a0-49a7-8f9a-d1d83f32e59f}</TemplateID>
+		<Name Package="{68d426da-855a-444b-ab61-2d36420528df}" ID="103"/>
+		<Description Package="{68d426da-855a-444b-ab61-2d36420528df}" ID="102"/>
+		<Icon Package="{68d426da-855a-444b-ab61-2d36420528df}" ID="201" />
+		<ProjectType>VisualBasic</ProjectType>
+		<SortOrder>360</SortOrder>
+		<DefaultName>ReportLanguage.report</DefaultName>
+	</TemplateData>
+	<TemplateContent>
+		<ProjectItem TargetFileName="$fileinputname$.report">report.report</ProjectItem>
+		<ProjectItem TargetFileName="$fileinputname$.report.diagram">report.diagram</ProjectItem>
+	</TemplateContent>
+</VSTemplate>
+
