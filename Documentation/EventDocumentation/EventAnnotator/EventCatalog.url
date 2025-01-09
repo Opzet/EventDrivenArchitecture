@@ -1,0 +1,24 @@
+using UserRegistration.Domain.Events;
+using UserRegistration.Infrastructure;
+
+namespace UserRegistration.Services
+{
+    public class UserService
+    {
+        private readonly EventStore _eventStore;
+        private readonly EventDispatcher _dispatcher;
+
+        public UserService(EventStore eventStore, EventDispatcher dispatcher)
+        {
+            _eventStore = eventStore;
+            _dispatcher = dispatcher;
+        }
+
+        public void RegisterUser(string username, string email)
+        {
+            var userRegisteredEvent = new UserRegisteredEvent(username, email);
+            _eventStore.Append(userRegisteredEvent);
+            _dispatcher.Dispatch(userRegisteredEvent);
+        }
+    }
+}
