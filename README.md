@@ -6,6 +6,7 @@ Event-sourcing is a powerful pattern that allows you to capture all changes to a
 When combined with the Command Query Responsibility Segregation (CQRS) pattern, event-sourcing becomes even more potent.
 
 Move away from a single representation that we interact with via CRUD, and move to a task-based UI.
+![EDA Visualisation](https://github.com/user-attachments/assets/908fd877-6b81-4f6f-923f-bbdc68b04b39)
 
 ### CRUD Pattern
 The mainstream approach people use for interacting with an information system is to treat it as a CRUD datastore. 
