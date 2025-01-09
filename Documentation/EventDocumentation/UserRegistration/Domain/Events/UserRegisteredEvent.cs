@@ -1,6 +1,4 @@
-﻿using UserRegistration.Attributes;
-
-namespace UserRegistration.Domain.Events
+﻿namespace UserRegistration.Domain.Events
 {
     /// <summary>
     /// Event triggered when a user registers.
