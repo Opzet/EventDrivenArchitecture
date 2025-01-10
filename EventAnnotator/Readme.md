@@ -2,6 +2,8 @@
 
 **Intent:** Documentation from a single source of truth — the [annotated] code
 
+Stakeholders can **Visualise** : [Event Catalog - Viewer Demo ](https://demo.eventcatalog.dev/visualiser/domains/Orders/0.0.3 )
+
 The **Event Annotator** is a **code-first tool** designed to enable developers to annotate source code in a way that automatically generates documentation. This documentation is then rendered in the **Event Viewer**.
 
 By focusing on code annotations, this tool ensures that event-driven architecture (EDA) documentation is always up-to-date and automatically generated, directly reflecting changes in the source code.
@@ -76,6 +78,7 @@ Once the catalog is bootstrapped, the documentation can be compiled and served:
   ```bash
   eventcatalog build
   ```
+For more details on [how to create an event catalog, visit: https://www.kallemarjokorpi.fi/blog/how-to-create-and-event-catalog/]( https://www.kallemarjokorpi.fi/blog/how-to-create-and-event-catalog/)
 
 - The **EventCatalog** app provides a set of powerful scripts to:
   - Generate the documentation catalog.
@@ -113,14 +116,11 @@ By using the **Event Annotator** and **EventCatalog**, you can answer these ques
 ---
 
 ## Event Visualizer: Open-Source Tool
-
+For more details, visit: [Event Catalog - Viewer](https://www.kallemarjokorpi.fi/blog/how-to-create-and-event-catalog/)
 The **Event Viewer** is an open-source, community-driven tool designed to help visualize your event catalog. It transforms complex event flows into clear, interactive diagrams, providing insights at a glance.
 
 - **User-Friendly Format:** Makes understanding complex event flows easy and intuitive.
 - **Cross-Team Communication:** Helps teams communicate event flows and event-driven architectures effectively.
-
-For more details, visit: [Event Catalog - Viewer](https://www.kallemarjokorpi.fi/blog/how-to-create-and-event-catalog/)
-
 ---
 
 ## Comparison: Code-First vs. Model-First
