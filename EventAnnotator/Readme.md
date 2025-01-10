@@ -53,6 +53,8 @@ Different to model first focus on intergrating thirdparty event-driven component
 
 ## **Open-Source Visualization**: 
   A community-driven, open-source tool to visualize your event catalog in a user-friendly format.
+  [Event Catalog - Viewer](https://demo.eventcatalog.dev/)
+  
 
 ### Workflow Features:
 - **Document Generation**: Automatically generate from [annotated] source code the Event Catalog schema catalog.
@@ -66,7 +68,7 @@ Different to model first focus on intergrating thirdparty event-driven component
 
 Intent : Simplifying the process of managing complex integrations.
 
-- **Closed-Source Visual Editor**:
+-  : **Event Studio** : Closed-Source Visual Editor
   A powerful, proprietary drag-and-drop editor designed for creating and managing your event catalog.
 
 - **Generators for Third-Party Services**:
