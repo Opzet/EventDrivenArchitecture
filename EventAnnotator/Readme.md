@@ -157,3 +157,11 @@ For more details on the **Event Catalog Generator** and **Event Studio**, please
 To get started with the **Event Annotator**, ensure your C# project is set up with event annotations, then use the EventCatalog tools to generate and visualize your event documentation.
 
 For detailed instructions, refer to the official documentation on [Event Annotator GitHub](https://github.com/your-repo-link).
+
+---
+
+## Modeller App:
+
+Could utilise https://github.com/amaurote/NodeGraphControl/
+
+https://github.com/amaurote/NodeGraphControl/blob/master/res/sample_use.PNG
