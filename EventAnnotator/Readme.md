@@ -141,6 +141,7 @@ The **Event Annotator** focuses on generating documentation directly from the co
 ## Model-First Approach (Proprietary)
 
 The **model-first** approach often uses proprietary tools such as **Event Studio** for designing and managing event catalogs. These visual editors allow for drag-and-drop configurations but may require more overhead in keeping event models in sync with the implementation.
+![image](https://github.com/user-attachments/assets/ab87d532-e34e-40a0-8060-f8bef3d58c75)
 
 ### Key Features of Model-First:
 - **Closed-Source Visual Editor:** Drag-and-drop editor for creating event catalogs.
