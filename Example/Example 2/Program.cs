@@ -6,7 +6,7 @@ using UserRegistration.Services;
 
 namespace UserRegistration
 {
-
+ 
     class Program
     {
         static void Main(string[] args)

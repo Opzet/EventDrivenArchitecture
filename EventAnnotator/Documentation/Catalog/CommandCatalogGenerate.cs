@@ -7,18 +7,18 @@ namespace EventAnnotator
 {
     public partial class CommandMetadataAttribute : Attribute
     {
-         public void GenerateMarkdown(string env, string filePath, string publishingExamplePath, string subscriptionExamplePath)
+         public void GenerateMarkdown(string cmd, string filePath)
         {
             // MDX documentation for EventCatalog 
 
-            if (!Array.Exists(Environments, e => e.Equals(env, StringComparison.OrdinalIgnoreCase)))
+            if (!Array.Exists(Environments, e => e.Equals(cmd, StringComparison.OrdinalIgnoreCase)))
             {
-                throw new ArgumentException($"Invalid environment: {env}");
+                throw new ArgumentException($"Invalid environment: {cmd}");
             }
 
             var markdown = new StringBuilder();
             markdown.AppendLine("---");
-            markdown.AppendLine($"id: {Domain}.{env}.events");
+            markdown.AppendLine($"id: {Domain}.{cmd}.events");
             markdown.AppendLine($"name: {Name}");
             markdown.AppendLine($"version: {Version}");
             markdown.AppendLine("summary: |");
@@ -53,17 +53,15 @@ namespace EventAnnotator
             markdown.AppendLine();
             markdown.AppendLine("### Publishing and Subscribing to Events");
             markdown.AppendLine();
-            markdown.AppendLine("#### Publishing Example");
-            markdown.AppendLine(LoadExampleCode(publishingExamplePath));
-            markdown.AppendLine();
-            markdown.AppendLine("#### Subscription Example");
-            markdown.AppendLine(LoadExampleCode(subscriptionExamplePath));
+            markdown.AppendLine(LoadExampleCode(cmd) );
 
             File.WriteAllText(filePath, markdown.ToString());
         }
 
-        private string LoadExampleCode(string exampleFilePath)
+        private string LoadExampleCode(string command)
         {
+            string exampleFilePath = $"code[{command}].md";
+
             if (File.Exists(exampleFilePath))
             {
                 return File.ReadAllText(exampleFilePath);
