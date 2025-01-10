@@ -1,163 +1,81 @@
-﻿
-# EventDrivenArchitecture **Annotator**
-This project is a code first [annotated] source mark up 
+# Event Annotator: Code-First Approach
 
-```csharp
-namespace UserRegistration.Domain.Commands
-{
-    /// <summary>
-    /// Command to register a new user.
-    /// </summary>
-    /// <remarks>
-    /// In the context of Event Sourcing, commands are used to encapsulate all the information needed to perform an action or trigger a state change in the system.
-    /// Commands are part of the Command Query Responsibility Segregation (CQRS) pattern, where they represent the "write" side of the application.
-    /// 
-    /// When a command is issued, it is handled by a command handler, which performs the necessary business logic and generates one or more events.
-    /// These events are then persisted to an event store and used to update the state of the application.
-    /// 
-    /// The RegisterUserCommand class encapsulates the data required to register a new user, including the user's name, email, and password.
-    /// When this command is handled, it will result in an event (e.g., UserRegisteredEvent) that represents the successful registration of the user.
-    /// </remarks>
-    [CommandMetadata(
-        domain: "RegisterUser",
-        name: "RegisterUser",
-        description: "Command to register a new user.",
-        version: "1.0",
-        summary: "Registers a new user in the system.",
-        owners: new[] { "admin@example.com" },
-        address: "https://api.example.com/register",
-        protocols: new[] { "HTTP", "HTTPS" },
-        environments: new[] { "Production", "Staging" },
-        channelOverview: "User registration channel"
-    )]
-    public class AddUserCommand
-    {
-        /// <summary>
-        /// Gets or sets the user name.
-        /// </summary>
-        public string UserName
-        {
-            get; set;
-        }
-```
+**Intent:** Documentation from a single source of truth — the [annotated] code
 
-## Event Annotator: **Code-First Approach**
+The **Event Annotator** is a **code-first tool** designed to help you annotate your source code in a way that automatically generates up-to-date documentation. This documentation is then rendered in the **Event Viewer**.
 
-Intent : Documentation from one source of truth, the [annotated] code
+By focusing on source code annotations, this approach ensures that your documentation is always synchronized with your codebase. This streamlines the process of documenting event-driven architectures, making them visually clear and easy to understand.
 
-The **Event Annotator** is a code-first tool that allows you to annotate source code in a way that automatically generates documentation, which is then rendered in the **Event Viewer**. 
-
-This process enables seamless integration of event-driven architecture with clear, visual event documentation from [annotated] source code.
-
-Different to model first focus on intergrating thirdparty event-driven components within your architecture, simplifying the process of managing complex integrations.
-
-### Workflow 
-
-Generate and save event MDX documentation 'catalog' from application C# source code [annotation], called 'bootstrapped' to be consumbed by 'eventcatalog build' command to bootstrap the catalog
-
-Once your catalog is bootstrapped, the source will contain the EventCatalog scripts that you can invoke with your package manager
-```
-    //Compile your bootstrapped EDA catalog for Visualisation (Static Site) hosted anywhere 
-    eventcatalog build
-```             
-**EventCatalog app** provides a set of scripts to help you generate, serve, and deploy your catalog
-
-```mermaid 
- graph LR;
- A[Souce Code with Event Annotations] --> B[CatalogGenerator ReGenerateMDXDocumentation] --> C[Filles in Event Catalog Template] --> D[eventcatalog build] --> E[ Visualiser Render : static html];
-```
-
-### Features:
-
-- **Document Generation**: Automatically generate from [annotated] source code the Event Catalog schema catalog.
-- **Event Catalog Schema**: The backbone of the system that defines events and their relationships.
-- **Deploy**: With the Event Catalog Schema,  create the static Visualisation.
-- **Open-Source Visualization**: Users can visualize event relationships and documentation through the open-source Event Viewer.
-
- EventCatalog helps you document your event-driven architectures in no time.
-
-⚡ ️ Bring discoverability and governance to your event-driven architectures.
-
-⚡️ Document your domains, services, messages (events, commands, queries) and channels.
-
-⚡️ Supports documenting OpenAPI specifications, schemas, code examples and much more.
-
-⚡️ EventCatalog visualizes your event-driven architectures.
-
-Document our domains, services and messages
-Version domains, services and messages
-Visualize flow between messages in our system
-Define bounded context and visualise our event-driven architecture?
-Bring discoverability to event-driven architectures?
-
-Event-driven architectures have been around for decades, and recently we have seen a rise of distributed message based architectures.
-
-With companies providing high levels of abstractions and cloud based services, building event-driven/distributed architectures are becoming more accessible for developers every day.
-
-These architecture styles are becoming popular as they provide teams the ability to create loosely coupled, distributed and highly scalable systems.
-
-Practices like EventStorming and EventModeling are equally becoming popular within teams as they look to map their business and domains into software architecture.
-
-### Complexity with event-driven architectures
-When you start building event-driven architectures complexity may be hidden. Over time your architecture matures and grows, more producers/consumers, that's when complexity presents itself.
-
-You may see questions start to emerge within your business:
-
-- What messages (events, commands, queries) do we have?
-- Why do these messages exist? What’s the context?
-- What are the payloads of these messages?
-- How can I make changes?
-- Who is consuming these messages?
-
-
-## Visualiser : Open-Source 
-  A community-driven, open-source tool to visualize your event catalog in a user-friendly format.
-
-  Transforms complex event flows into clear, interactive diagrams. 
-  
-  Gain insights at a glance and communicate effectively across teams.
-  
-  [Event Catalog - Viewer](https://demo.eventcatalog.dev/)
-
-
-  https://www.kallemarjokorpi.fi/blog/how-to-create-and-event-catalog/
-
-# **Model-First Approach** (Proprietary)
-
-### Event Catalog: Visual Low-Code Model
-
-Intent : Simplifying the process of managing complex integrations.
-
--  : **Event Studio** : Closed-Source Visual Editor
-  A powerful, proprietary drag-and-drop editor designed for creating and managing your event catalog.
-
-- **Generators for Third-Party Services**:
-  Automatically generate scaffolding code for accessing external services through the Event Catalog schema, edited by the visual tools. For further details, refer to [Event Catalog Generator Documentation](https://www.eventcatalog.dev/docs/development/plugins/generators).
-
-## **Overview**
-
-The **Event Catalog Generators** leverage a schema defined in the visual editor and generate corresponding code. 
-
-This code helps in seamless interaction with third-party services, simplifying the process of defining, managing, and integrating events within your application.
-
-### Key Features:
-- **Event Catalog Schema**: The backbone of the system that defines events and their relationships.
-- **Code Generation**: Automatically generate scaffold code to interact with external services based on the Event Catalog schema.
-- **Open-Source Visualization**: Users can visualize event relationships and documentation through the open-source Event Viewer.
-- **Closed-Source Editor**: The proprietary editor allows for drag-and-drop event catalog creation, enabling easy and fast configuration of event-driven systems.
-
-# Event Source Revenue Model ??
-
-## **Event Source - Closed Source Visual Editor**
-
-The **Event Source** is a drag-and-drop visual editor used to design your Event Catalog. It allows you to:
-- **Drag and Drop (DnD) Widgets**: Add commercial provider widgets to the canvas, creating your event sources.
-- **Code Generators**: Automatically generate scaffolding code to integrate with third-party services.
-
-## **Event Source Workflow**
-
-1. **Create Events**: Using the visual editor, you can drag and drop commercial provider widgets onto the canvas to create events and configure their parameters.
-2. **Generate Code**: The generator tool scaffolds the necessary code to connect to and interact with the third-party services.
-3. **Deploy**: With the generated code, deploy the event-driven components within your architecture, simplifying the process of managing complex integrations.
+Unlike the traditional model-first approach, which focuses on designing events upfront, the **Event Annotator** simplifies the process of integrating third-party event-driven components. It provides a more straightforward method for managing and visualizing complex event-driven integrations within your architecture.
 
 ---
+
+## Workflow Overview
+
+### Step 1: Generate and Save Event Documentation (MDX Catalog)
+- Annotate your C# source code with event details.
+- Use the **bootstrapped** process to generate an **MDX documentation catalog** from the annotated code.
+- The catalog is generated using the `eventcatalog build` command.
+- The output is a comprehensive **EventCatalog** containing event definitions, structures, and other relevant documentation in MDX format.
+
+### Step 2: Bootstrap the Event Catalog
+- The bootstrapped event catalog is automatically consumed by the `eventcatalog build` command.
+- This command processes your annotated C# code and generates the event documentation, ready to be served and viewed.
+
+### Step 3: Compile and Serve the Event Catalog
+Once bootstrapped, the catalog is ready to be compiled and served:
+- You can compile the **EventCatalog** for visualization purposes, generating a static site that can be hosted anywhere.
+- Use the following command to build the static site:
+
+  ```bash
+  eventcatalog build
+  ```
+
+- The **EventCatalog** app provides a set of powerful scripts to help you:
+  - Generate the documentation catalog.
+  - Serve the catalog locally or deploy it to any hosting platform.
+
+---
+
+## Key Features
+
+- **Code-First Approach:** Focuses on generating documentation directly from the annotated code, ensuring your documentation remains up-to-date and accurate.
+- **Simplifies Integration:** The Event Annotator is designed to integrate third-party event-driven components seamlessly into your existing architecture.
+- **Automated Documentation Generation:** Once your code is annotated, the Event Annotator handles the automatic generation of event-driven architecture (EDA) documentation.
+- **Flexibility in Hosting:** The static site generated by the EventCatalog can be hosted anywhere, providing flexibility in how you deploy and visualize your event documentation.
+
+---
+
+## Example Usage
+
+1. **Annotate Your C# Source Code**
+   - Add event annotations in your code base to describe your events, handlers, and any additional metadata that should appear in the documentation.
+
+2. **Generate the Event Catalog**
+   - Use the `eventcatalog build` command to generate the MDX documentation catalog from the annotated source code.
+
+   ```bash
+   eventcatalog build
+   ```
+
+3. **Host and Visualize the Documentation**
+   - Serve the static site generated from the catalog or deploy it to a platform of your choice to visualize your event documentation.
+
+By following this process, you ensure that your event-driven architecture is documented effectively and consistently, directly from your source code annotations.
+
+---
+
+## Benefits
+
+- **Real-time Documentation Sync:** Documentation is always in sync with your codebase, reducing the risk of outdated or inaccurate documentation.
+- **Easy Integration of Third-Party Components:** Integrate external event-driven services and components without disrupting your existing architecture.
+- **Clarity and Visual Representation:** The generated documentation offers a clear, visual representation of your event-driven architecture, making it easier for developers to understand and work with.
+- **Simplified Maintenance:** Since the documentation is automatically generated from the source code, maintaining it becomes much easier as your architecture evolves.
+
+---
+
+### Get Started
+
+To get started with the Event Annotator, make sure your C# project is set up with the appropriate annotations. Then, use the EventCatalog tools to generate and visualize your event documentation.
+
+For detailed instructions, refer to the official documentation on [Event Annotator GitHub](https://github.com/your-repo-link).
