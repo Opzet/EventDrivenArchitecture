@@ -51,17 +51,77 @@ This process enables seamless integration of event-driven architecture with clea
 
 Different to model first focus on intergrating thirdparty event-driven components within your architecture, simplifying the process of managing complex integrations.
 
-## **Open-Source Visualization**: 
-  A community-driven, open-source tool to visualize your event catalog in a user-friendly format.
-  [Event Catalog - Viewer](https://demo.eventcatalog.dev/)
-  
+### Workflow 
 
-### Workflow Features:
+Generate and save event MDX documentation 'catalog' from application C# source code [annotation], called 'bootstrapped' to be consumbed by 'eventcatalog build' command to bootstrap the catalog
+
+Once your catalog is bootstrapped, the source will contain the EventCatalog scripts that you can invoke with your package manager
+```
+    //Compile your bootstrapped EDA catalog for Visualisation (Static Site) hosted anywhere 
+    eventcatalog build
+```             
+**EventCatalog app** provides a set of scripts to help you generate, serve, and deploy your catalog
+
+```mermaid 
+ graph LR;
+ A[Souce Code with Event Annotations] --> B[CatalogGenerator ReGenerateMDXDocumentation] --> C[Filles in Event Catalog Template] --> D[eventcatalog build] --> E[ Visualiser Render : static html];
+```
+
+### Features:
+
 - **Document Generation**: Automatically generate from [annotated] source code the Event Catalog schema catalog.
 - **Event Catalog Schema**: The backbone of the system that defines events and their relationships.
 - **Deploy**: With the Event Catalog Schema,  create the static Visualisation.
 - **Open-Source Visualization**: Users can visualize event relationships and documentation through the open-source Event Viewer.
- 
+
+ EventCatalog helps you document your event-driven architectures in no time.
+
+⚡ ️ Bring discoverability and governance to your event-driven architectures.
+
+⚡️ Document your domains, services, messages (events, commands, queries) and channels.
+
+⚡️ Supports documenting OpenAPI specifications, schemas, code examples and much more.
+
+⚡️ EventCatalog visualizes your event-driven architectures.
+
+Document our domains, services and messages
+Version domains, services and messages
+Visualize flow between messages in our system
+Define bounded context and visualise our event-driven architecture?
+Bring discoverability to event-driven architectures?
+
+Event-driven architectures have been around for decades, and recently we have seen a rise of distributed message based architectures.
+
+With companies providing high levels of abstractions and cloud based services, building event-driven/distributed architectures are becoming more accessible for developers every day.
+
+These architecture styles are becoming popular as they provide teams the ability to create loosely coupled, distributed and highly scalable systems.
+
+Practices like EventStorming and EventModeling are equally becoming popular within teams as they look to map their business and domains into software architecture.
+
+### Complexity with event-driven architectures
+When you start building event-driven architectures complexity may be hidden. Over time your architecture matures and grows, more producers/consumers, that's when complexity presents itself.
+
+You may see questions start to emerge within your business:
+
+- What messages (events, commands, queries) do we have?
+- Why do these messages exist? What’s the context?
+- What are the payloads of these messages?
+- How can I make changes?
+- Who is consuming these messages?
+
+
+## Visualiser : Open-Source 
+  A community-driven, open-source tool to visualize your event catalog in a user-friendly format.
+
+  Transforms complex event flows into clear, interactive diagrams. 
+  
+  Gain insights at a glance and communicate effectively across teams.
+  
+  [Event Catalog - Viewer](https://demo.eventcatalog.dev/)
+
+
+  https://www.kallemarjokorpi.fi/blog/how-to-create-and-event-catalog/
+
 # **Model-First Approach** (Proprietary)
 
 ### Event Catalog: Visual Low-Code Model
