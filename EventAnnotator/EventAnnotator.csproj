@@ -6,6 +6,40 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <Title>Event Annotator</Title>
+    <Version>25.1.12</Version>
+    <Authors>David V</Authors>
+    <Company>PlanWorkDone</Company>
+    <Description>Provides tools for annotating and documenting events in an event-driven architecture.</Description>
+    <PackageReleaseNotes>25.1.12 Initial release</PackageReleaseNotes>
+    <PackageIcon>iconH.png</PackageIcon>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/Opzet/EventDrivenArchitecture</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageTags>Event Documentation EDA</PackageTags>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <ApplicationIcon>iconH.ico</ApplicationIcon>
+    <PackageProjectUrl>https://github.com/Opzet/EventDrivenArchitecture</PackageProjectUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Content Include="iconH.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="iconH.png" Pack="true" PackagePath="\" CopyToOutputDirectory="Always" >
+        <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Readme.md" Pack="true" PackagePath="\" >
+        <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+  
   <ItemGroup>
     <Compile Remove="Documentation\my-event-catalog\**" />
     <EmbeddedResource Remove="Documentation\my-event-catalog\**" />
