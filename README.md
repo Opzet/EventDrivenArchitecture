@@ -11,7 +11,8 @@ Stakeholders can **Visualise**  : [Event Catalog - Viewer Demo ](https://demo.ev
 
 ![EDA Visualisation](https://github.com/user-attachments/assets/908fd877-6b81-4f6f-923f-bbdc68b04b39)
 
-## Backstage   ?
+## Backstage  - Supporting Framework
+https://backstage.io/demos 
 https://www.eventcatalog.dev/docs/development/plugins/backstage/intro
 
 Many folks are using Backstage for their internal developer portals. Backstage is a highly configurable platform that allows you to document your architecture in components, apis, services, domains and much more.
@@ -19,6 +20,7 @@ Many folks are using Backstage for their internal developer portals. Backstage i
 Backstage supports plugins, that have a frontend and backend support.
 
 Using the EventCatalog Backstage plugin you can embed your EventCatalog information into backstage.
+https://backstage.io/docs/features/software-catalog/descriptor-format/#kind-api
 
 ----
 
