@@ -11,6 +11,9 @@ Stakeholders can **Visualise**  : [Event Catalog - Viewer Demo ](https://demo.ev
 
 ![EDA Visualisation](https://github.com/user-attachments/assets/908fd877-6b81-4f6f-923f-bbdc68b04b39)
 
+Discord
+https://discord.com/channels/918092420338569216/@home
+
 ## Backstage  - Supporting Framework
 https://backstage.io/demos 
 https://www.eventcatalog.dev/docs/development/plugins/backstage/intro
