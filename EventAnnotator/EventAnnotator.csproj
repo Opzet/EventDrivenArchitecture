@@ -28,13 +28,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="iconH.png" Pack="true" PackagePath="\" CopyToOutputDirectory="Always" >
+    <None Include="iconH.png" Pack="true" PackagePath="\" CopyToOutputDirectory="Always">
         <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Readme.md" Pack="true" PackagePath="\" >
+    <None Include="Readme.md" Pack="true" PackagePath="\">
         <Pack>True</Pack>
       <PackagePath>\</PackagePath>
     </None>
