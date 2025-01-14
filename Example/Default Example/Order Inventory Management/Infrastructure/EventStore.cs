@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using UserRegistration.Domain.Events;
+using OIM.Domain.Events;
 
-namespace UserRegistration.Infrastructure
+namespace OIM.Infrastructure
 {
     // Event store to keep track of events
     public class EventStore

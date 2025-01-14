@@ -1,4 +1,4 @@
-﻿namespace UserRegistration.Domain.Events
+﻿namespace OIM.Domain.Events
 {
     /// <summary>
     /// Interface for domain events.

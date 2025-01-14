@@ -1,4 +1,4 @@
-﻿namespace UserRegistration.Domain.Events
+﻿namespace OIM.Domain.Events
 {
     /// <summary>
     /// Event triggered when a user registers.

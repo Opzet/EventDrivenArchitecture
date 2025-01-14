@@ -1,8 +1,9 @@
 
 using EventAnnotator;
 
-namespace UserRegistration.Domain.Commands
+namespace OIM.Domain.Commands
 {
+    //https://demo.eventcatalog.dev/
     /// <summary>
     /// Command to register a new user.
     /// </summary>
@@ -28,7 +29,7 @@ namespace UserRegistration.Domain.Commands
         environments: new[] { "Production", "Staging" },
         channelOverview: "User registration channel"
     )]
-    public class AddUserCommand
+    public class AddInventory
     {
         /// <summary>
         /// Gets or sets the user name.

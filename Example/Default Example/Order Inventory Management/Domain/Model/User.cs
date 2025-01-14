@@ -1,9 +1,9 @@
 
 // Example event: UserRegistered
-using UserRegistration.Domain.Events;
+using OIM.Domain.Events;
 
 
-namespace UserRegistration.Domain.Model
+namespace OIM.Domain.Model
 {
 
     public class User : UserRegisteredEvent

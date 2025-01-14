@@ -1,7 +1,7 @@
-using UserRegistration.Domain.Events;
-using UserRegistration.Infrastructure;
+using OIM.Domain.Events;
+using OIM.Infrastructure;
 
-namespace UserRegistration.Services
+namespace OIM.Services
 {
     public class UserService
     {

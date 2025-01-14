@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using UserRegistration.Domain.Events;
+using OIM.Domain.Events;
 
-namespace UserRegistration.Infrastructure
+namespace OIM.Infrastructure
 {
     // Event dispatcher to handle event notifications
     public class EventDispatcher

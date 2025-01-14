@@ -9,9 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\Events\Inventory\" />
-    <Folder Include="Domain\Events\Payment\" />
-    <Folder Include="Domain\Events\Orders\" />
+    <Folder Include="Domain\Orders\Services\InventoryService\Queries\" />
   </ItemGroup>
 
   <ItemGroup>
