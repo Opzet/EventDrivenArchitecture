@@ -1,3 +1,93 @@
+# Event Sourcing
+
+Move away from a single representation that we interact with via CRUD, and move to a task-based UI.
+
+Stakeholders can **Visualise**  : [Event Catalog - Viewer Demo ](https://demo.eventcatalog.dev/visualiser/domains/Orders/0.0.3 )
+
+![EDA Visualisation](https://github.com/user-attachments/assets/908fd877-6b81-4f6f-923f-bbdc68b04b39)
+
+Using events (business operations are stored as a series of events) helps to create a synergy between technology and business solutions. 
+
+Events help to make a business-friendly API. We can inform the modules directly about what business (domain) events take place. Thanks to that, other teams will understand better what they can expect.
+
+Modelling with events helps on keeping the focus on the business flow without getting into nitty-gritty technical details. 
+
+Events make relations between modules more straightforward. By using a command and an event, we can show the type of dependency between the modules. For example, we can define that the financial module should wait for the confirmation event from the reservation module to issue an invoice. We’re stating that in the ticket reservation process, the financial module is streamlined to reservation one. If we send a command, then we define strict relation.
+
+## 1.1 What is Event Sourcing?
+Event Sourcing is a design pattern in which results of business operations are stored as a series of events.
+
+It is an alternative way to persist data. In contrast with state-oriented persistence that only keeps the latest version of the entity state, Event Sourcing stores each state change as a separate event.
+
+Thanks to that, no business data is lost. Each operation results in the event stored in the database. That enables extended auditing and diagnostics capabilities (both technically and business-wise). What's more, as events contains the business context, it allows wide business analysis and reporting.
+
+## 1.2 What is Event?
+Events represent facts in the past. They carry information about something accomplished. It should be named in the past tense, e.g. "user added", "order confirmed". Events are not directed to a specific recipient - they're broadcasted information. It's like telling a story at a party. We hope that someone listens to us, but we may quickly realise that no one is paying attention.
+
+
+### 1.3 What is Stream?
+Events are logically grouped into streams. In Event Sourcing, streams are the representation of the entities. All the entity state mutations end up as the persisted events. Entity state is retrieved by reading all the stream events and applying them one by one in the order of appearance.
+
+A stream should have a unique identifier representing the specific object. Each event has its own unique position within a stream. This position is usually represented by a numeric, incremental value. This number can be used to define the order of the events while retrieving the state. It can also be used to detect concurrency issues.
+
+### 1.4 Event representation
+Technically events are messages.
+
+They may be represented, e.g. in JSON, Binary, XML format. Besides the data, they usually contain:
+```json
+id: unique event identifier.
+type: name of the event, e.g. "invoice issued".
+stream id: object id for which event was registered (e.g. invoice id).
+stream position (also named version, order of occurrence, etc.): the number used to decide the order of the event's occurrence for the specific object (stream).
+timestamp: representing a time at which the event happened.
+other metadata like correlation id, causation id, etc.
+Sample event JSON can look like:
+
+{
+  "id": "e44f813c-1a2f-4747-aed5-086805c6450e",
+  "type": "invoice-issued",
+  "streamId": "INV/2021/11/01",
+  "streamPosition": 1,
+  "timestamp": "2021-11-01T00:05:32.000Z",
+
+  "data":
+  {
+    "issuedTo": {
+      "name": "Oscar the Grouch",
+      "address": "123 Sesame Street"
+    },
+    "amount": 34.12,
+    "number": "INV/2021/11/01",
+    "issuedAt": "2021-11-01T00:05:32.000Z"
+  },
+
+  "metadata":
+  {
+    "correlationId": "1fecc92e-3197-4191-b929-bd306e1110a4",
+    "causationId": "c3cf07e8-9f2f-4c2d-a8e9-f8a612b4a7f1"
+  }
+}
+```
+
+
+### 1.5 Event Storage
+Event Sourcing is not related to any type of storage implementation. As long as it fulfills the assumptions, it can be implemented having any backing database (relational, document, etc.). The state has to be represented by the append-only log of events. The events are stored in chronological order, and new events are appended to the previous event. Event Stores are the databases' category explicitly designed for such purpose.
+
+
+### 1.6 Retrieving the current state from events
+In Event Sourcing, the state is stored in events. Events are logically grouped into streams. Streams can be thought of as the entities' representation. Traditionally (e.g. in relational or document approach), each entity is stored as a separate record.
+
+Id	IssuerName	IssuerAddress	Amount	Number	IssuedAt
+e44f813c	Oscar the Grouch	123 Sesame Street	34.12	INV/2021/11/01	2021-11-01
+In Event Sourcing, the entity is stored as the series of events that happened for this specific object, e.g. InvoiceInitiated, InvoiceIssued, InvoiceSent.
+
+----
+#Events:
+
+are immutable: "What has been seen, cannot be unseen".
+can be ignored but cannot be retracted (as you cannot change the past).
+can be interpreted differently. The basketball match result is a fact. Winning team fans will interpret it positively. Losing team fans - not so much.
+
 
 ## Event-Driven Architecture
 
@@ -5,11 +95,90 @@ Event-driven architecture is considered to be the holy grail of system design in
 Event-sourcing is a powerful pattern that allows you to capture all changes to an application's state as a sequence of events. This approach provides a historical view of the application's state and enables you to reconstruct past states at any point in time. 
 When combined with the Command Query Responsibility Segregation (CQRS) pattern, event-sourcing becomes even more potent.
 
-Move away from a single representation that we interact with via CRUD, and move to a task-based UI.
 
-Stakeholders can **Visualise**  : [Event Catalog - Viewer Demo ](https://demo.eventcatalog.dev/visualiser/domains/Orders/0.0.3 )
+## Task Based UI
+A task based UI is quite different from a CRUD based UI. 
 
-![EDA Visualisation](https://github.com/user-attachments/assets/908fd877-6b81-4f6f-923f-bbdc68b04b39)
+In a task based UI you track what the user is doing and you push forward commands representing the intent of the user. 
+
+I would like to state once and for all that CQRS does not require a task based UI. 
+We could apply CQRS to a CRUD based interface (though things like creating separated data models would be much harder).
+
+# Domain Driven Design.
+There is however one thing that does really require a task based UI… That is Domain Driven Design.
+
+## Application Service Layer
+The Application Service Layer in Domain Driven Design represents the tasks the system can perform.
+
+It does not just copy data to domain objects and save them… It should be dealing with behaviors on the objects… Before going further let’s look at what happened if we did;
+
+there would be no verbs in our ubiquitous language except for “Create”, “Delete”, and “Change”.  
+
+While there exist many domains where this is what the Ubiquitous Language is actually like, you probably should not be using Domain Driven Design for such systems.
+
+The concept of a task based UI is more often than not assumed to be part of CQRS, it is not, it is there so the domain can have verbs but also capturing the intent of the user is important in general. 
+
+Was this a managerial override or a normal update? Does it make a difference? It depends on what question you want to ask …
+
+ 
+Moving on to the next pattern that gets confused into CQRS
+ 
+## Event Sourcing
+
+For this I want to be clear, when I use this term I am not encompassing all of what is written on the bliki. I am referring to storing current state as a series of events and rebuilding state within the system by replaying that series of events. .
+
+On the command side of the equation, since reads are no longer on the domain, storing events can be a great way of keeping the current state. 
+
+The value increases more if you decide to have two separate models (a write model and a read model) and you have a need to integrate between the two of them as you will likely be doing that through events. 
+
+Since you are building the eventing anyway, why not just use the one model to manage your state?
+
+
+## Messaging Patterns
+There is no need to use messaging patterns with CQRS. 
+
+That said, if you separate your data models you will more likely than not use messaging in the integration between the models because it offers interesting possibilities.
+
+Finally I come to the last “pattern” I hate to call it a pattern when it is really a concept that people tend to put into their definitions of CQRS and it goes hand in hand with messaging.
+
+ 
+## Eventual Consistency
+
+Eventual consistency is also quite often introduced between the services. 
+
+It is done for many architectural reasons but the largest is that it allows you to increase your scalability and availability. 
+
+If you remember CAP theorem consistency if given up allows increases in the other two.
+
+Eventual consistency is extremely useful in between the models if you have them in a separated fashion but is in no way a property of CQRS itself.
+
+ 
+## Summary
+Going through all of these we can see that CQRS itself is actually a fairly trivial pattern. 
+
+What is interesting around CQRS is not CQRS itself but the architectural properties in the integration of the two services. 
+
+In other words the interesting stuff is not really the CQRS pattern itself but in the architectural decisions that can be made around it. 
+
+Don’t get me wrong there are a lot of interesting decisions that can be made around a system that has had CQRS applied … just don’t confuse all of those architectural decisions with CQRS itself.
+
+### Note:
+
+A simpler way to refer to the current most common architectures using CQRS, RIDE = Read, Intent, Domain, Events
+
+Chosen as summary points of a typical cqrs system:
+[Client] =Commands=> [Domain Model] =Events=> [Read Model] =DTOs=> [Client]
+
+A key point is that Commands carry Intents, and summarizing a little this can be simplified:
+[Client] => Intent => Domain => Events => Read => [Client]
+
+And since a Client would typically read before having some intention, reordered:
+Read => [Client] => Intent => Domain => Events
+
+And since everything should be viewed from the Client perspective, we can leave that out:
+**Read => Intent => Domain => Events = RIDE**
+
+
 
 Discord
 https://discord.com/channels/918092420338569216/@home
@@ -128,85 +297,3 @@ That is it. That is the entirety of the CQRS pattern. There is nothing more to i
 The largest possible benefit though is that it recognizes that their are different architectural properties when dealing with commands and queries … for example it allows us to host the two services differently eg: we can host the read service on 25 servers and the write service on two. The processing of commands and queries is fundamentally asymmetrical, and scaling the services symmetrically does not make a lot of sense.
 
  
-
-## Task Based UI
-A task based UI is quite different from a CRUD based UI. 
-
-In a task based UI you track what the user is doing and you push forward commands representing the intent of the user. 
-
-I would like to state once and for all that CQRS does not require a task based UI. 
-We could apply CQRS to a CRUD based interface (though things like creating separated data models would be much harder).
-
-# Domain Driven Design.
-There is however one thing that does really require a task based UI… That is Domain Driven Design.
-
-## Application Service Layer
-The Application Service Layer in Domain Driven Design represents the tasks the system can perform.
-
-It does not just copy data to domain objects and save them… It should be dealing with behaviors on the objects… Before going further let’s look at what happened if we did;
-
-there would be no verbs in our ubiquitous language except for “Create”, “Delete”, and “Change”.  
-
-While there exist many domains where this is what the Ubiquitous Language is actually like, you probably should not be using Domain Driven Design for such systems.
-
-The concept of a task based UI is more often than not assumed to be part of CQRS, it is not, it is there so the domain can have verbs but also capturing the intent of the user is important in general. 
-
-Was this a managerial override or a normal update? Does it make a difference? It depends on what question you want to ask …
-
- 
-Moving on to the next pattern that gets confused into CQRS
- 
-## Event Sourcing
-
-For this I want to be clear, when I use this term I am not encompassing all of what is written on the bliki. I am referring to storing current state as a series of events and rebuilding state within the system by replaying that series of events. .
-
-On the command side of the equation, since reads are no longer on the domain, storing events can be a great way of keeping the current state. 
-
-The value increases more if you decide to have two separate models (a write model and a read model) and you have a need to integrate between the two of them as you will likely be doing that through events. 
-
-Since you are building the eventing anyway, why not just use the one model to manage your state?
-
-
-## Messaging Patterns
-There is no need to use messaging patterns with CQRS. 
-
-That said, if you separate your data models you will more likely than not use messaging in the integration between the models because it offers interesting possibilities.
-
-Finally I come to the last “pattern” I hate to call it a pattern when it is really a concept that people tend to put into their definitions of CQRS and it goes hand in hand with messaging.
-
- 
-## Eventual Consistency
-
-Eventual consistency is also quite often introduced between the services. 
-
-It is done for many architectural reasons but the largest is that it allows you to increase your scalability and availability. 
-
-If you remember CAP theorem consistency if given up allows increases in the other two.
-
-Eventual consistency is extremely useful in between the models if you have them in a separated fashion but is in no way a property of CQRS itself.
-
- 
-## Summary
-Going through all of these we can see that CQRS itself is actually a fairly trivial pattern. 
-
-What is interesting around CQRS is not CQRS itself but the architectural properties in the integration of the two services. 
-
-In other words the interesting stuff is not really the CQRS pattern itself but in the architectural decisions that can be made around it. 
-
-Don’t get me wrong there are a lot of interesting decisions that can be made around a system that has had CQRS applied … just don’t confuse all of those architectural decisions with CQRS itself.
-
-### Note:
-
-A simpler way to refer to the current most common architectures using CQRS, RIDE = Read, Intent, Domain, Events
-
-Chosen as summary points of a typical cqrs system:
-[Client] =Commands=> [Domain Model] =Events=> [Read Model] =DTOs=> [Client]
-
-A key point is that Commands carry Intents, and summarizing a little this can be simplified:
-[Client] => Intent => Domain => Events => Read => [Client]
-
-And since a Client would typically read before having some intention, reordered:
-Read => [Client] => Intent => Domain => Events
-
-And since everything should be viewed from the Client perspective, we can leave that out:
-**Read => Intent => Domain => Events = RIDE**
