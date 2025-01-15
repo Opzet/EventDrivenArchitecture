@@ -1,4 +1,5 @@
-﻿using Ex3_Invoicing.Model;
+﻿using Ex3_Invoicing.Infrastructure;
+using Ex3_Invoicing.Model;
 using Ex3_Invoicing.Resolve;
 using static Ex3_Invoicing.Events.InvoiceEvents;
 using static Ex3_Invoicing.Model.Invoice;
@@ -9,10 +10,47 @@ namespace Ex3_Invoicing
     {
         static void Main(string[] args)
         {
-            Demo();
+            DemoEventSourcing();
         }
 
-        static void Demo()
+        static void DemoEventSourcing()
+        {
+            // Events are immutable and are used to capture and persist these state changes.
+
+            EventStore eventStore = new EventStore();
+
+            Console.WriteLine("EDA with Event Sourcing");
+            var invoiceInitiated = new InvoiceInitiated(
+                "INV/2021/11/01",
+                34.12,
+                new Person("Oscar the Grouch", "123 Sesame Street"),
+                DateTime.UtcNow
+            );
+            eventStore.Append(invoiceInitiated);
+
+            var invoiceIssued = new InvoiceIssued(
+                "Cookie Monster",
+                DateTime.UtcNow
+            );
+            eventStore.Append(invoiceIssued);
+
+
+            var invoiceSent = new InvoiceSent(
+                InvoiceSendMethod.Email,
+                DateTime.UtcNow
+            );
+
+            eventStore.Append(invoiceSent);
+
+            // Get all events from the event store
+            var events = eventStore.GetAllEvents();
+
+        }
+
+
+
+
+        static void Demo_eventinmemory()
         {
             Console.WriteLine("List of Events in memory");
 

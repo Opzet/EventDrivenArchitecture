@@ -42,8 +42,6 @@ namespace Ex3_Invoicing.Model
             get; internal set;
         }
 
-
-
         public Person Customer
         {
             get; internal set;

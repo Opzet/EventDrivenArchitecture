@@ -19,8 +19,10 @@ namespace Ex3_Invoicing.Events
             environments: new[] { "Production", "Staging" },
             channelOverview: "Invoicing channel"
         )]
-        public record InvoiceInitiated(
-            string Number, 
+        public record InvoiceInitiated 
+        (
+
+            string Number,
             double Amount,
             Person Customer,
             DateTime InitiatedAt
