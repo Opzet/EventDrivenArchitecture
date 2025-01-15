@@ -1,4 +1,4 @@
-﻿namespace OIM.Domain.Events
+﻿namespace Ex3_Invoicing.Events
 {
     /// <summary>
     /// Interface for domain events.

@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UserRegistration", "Example
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Order Inventory Management", "Example\Default Example\Order Inventory Management\Order Inventory Management.csproj", "{6F47AE6F-8B3F-4242-8751-534A4E2DB9CF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Ex3_Invoicing", "Example\Ex3_Invoicing\Ex3_Invoicing.csproj", "{77F88EAD-44CC-4AE4-8CE5-EE05382CE1A9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -29,6 +31,10 @@ Global
 		{6F47AE6F-8B3F-4242-8751-534A4E2DB9CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6F47AE6F-8B3F-4242-8751-534A4E2DB9CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6F47AE6F-8B3F-4242-8751-534A4E2DB9CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{77F88EAD-44CC-4AE4-8CE5-EE05382CE1A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{77F88EAD-44CC-4AE4-8CE5-EE05382CE1A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{77F88EAD-44CC-4AE4-8CE5-EE05382CE1A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{77F88EAD-44CC-4AE4-8CE5-EE05382CE1A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -36,6 +42,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{E547FE63-7424-64F1-0171-017356736E86} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 		{6F47AE6F-8B3F-4242-8751-534A4E2DB9CF} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{77F88EAD-44CC-4AE4-8CE5-EE05382CE1A9} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A4DF059B-9A2C-4CFE-B77F-0AF069BDE486}

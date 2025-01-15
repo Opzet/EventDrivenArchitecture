@@ -17,7 +17,7 @@ namespace OIM.Services
         public void RegisterUser(string username, string email)
         {
             // Create a new UserRegisteredEvent
-            var userRegisteredEvent = new UserRegisteredEvent(username, email);
+            var userRegisteredEvent = new InventoryAdjusted(username, email);
 
             // Append the event to the event store
             _eventStore.Append(userRegisteredEvent);
