@@ -23,6 +23,11 @@ In contrast to state-oriented persistence models that store only the latest vers
 | **Auditability**            | Built-in, as events are stored with timestamps | Not naturally supported                     |
 | **Reconstructing State**    | By replaying events in order                  | Not directly supported                       |
 
+**Eventual consistency** contrasts to traditional **ACID** (atomicity, consistency, isolation, durability).
+If no new updates are made to a given data item, eventually all accesses to that item will return the last updated value.
+Eventual consistency, also called optimistic replication, is widely deployed in distributed systems and has origins in early mobile computing projects.
+A system that has achieved eventual consistency is often said to have converged, or achieved replica convergence
+
 ## Event Sourcing
 
 Event Sourcing is an alternative to traditional state persistence. In a state-oriented system, the entity’s current state is stored, and the latest version replaces the old state. However, in Event Sourcing, each change in state (i.e., an event) is stored in an append-only log. This allows you to **reconstruct** the state of an entity at any point in time by replaying all the events associated with it.
@@ -33,7 +38,18 @@ In a banking system, the transaction list (events like `DepositMade`, `Withdrawa
 
 ---
 
-## Key Concepts
+## Terminology and Concepts
+First, some terminology that we're going to use throughout this section:
+
+**Event** - a persisted business event representing a change in state or record of an action taken in the system
+**Stream** - a related "stream" of events representing a single aggregate
+**Aggregate** - a type of projection that "aggregates" data from multiple events to create a single read-side view document
+**Projection** - any strategy for generating "read side" views from the raw events
+**Inline Projections** - a projection that executes "inline" as part of any event capture transaction to build read-side views that are persisted as a document
+**Async Projections** - a projection that runs in a background process using an eventual consistency strategy, and is stored as a document
+**Live Projections** - evaluates a projected view from the raw event data on demand within Marten without persisting the created view
+
+Performance can be aggregating events via snapshot caching using the aggregate type.
 
 ### What is an Event?
 An **Event** represents something that has already happened and is stored in the past tense. Events are not directed to a specific recipient—they are broadcasted and can be listened to by multiple consumers.
