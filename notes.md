@@ -11,7 +11,7 @@ https://learn.particular.net/courses/adsd-online
 
 Introduction: Systems vs. Applications
 
- -  Fallacy
+# Fallacy
  1. The network is reliable
  2. Latency isn’t a problem
  3. Bandwidth isn’t a problem
@@ -20,12 +20,12 @@ Introduction: Systems vs. Applications
  6. The admin will know what to do
  7. Transport cost isn’t a problem
  8. The network is homogeneous
+ 
  Summary:  fallacies of distributed computing
-
- 9. The system is atomic
- 10. The system is finished
- 11. Towards a better development process
- 12. The business logic can and should be centralized
+ 1. The system is atomic
+ 2. The system is finished
+ 3. Towards a better development process
+ 4. The business logic can and should be centralized
 
 
 ## Coupling
