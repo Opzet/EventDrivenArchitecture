@@ -1,5 +1,5 @@
 ﻿
-# Ex4 School
+# Ex4 CourseManager
 
 ![image](https://github.com/user-attachments/assets/8b9cf398-e533-4c23-bcbb-0c2eb3e0b11e)
 
