@@ -5,7 +5,7 @@ using static Ex3_Invoicing.Model.Invoice;
 
 namespace Ex3_Invoicing.Events
 {
-    public class InvoiceEvents
+    public class InvoiceEvents // : Event
     {
         [CommandMetadata(
             domain: "Invoicing",

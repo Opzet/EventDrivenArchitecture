@@ -17,12 +17,12 @@ public static class SerializationExtensions
 
     public class NonDefaultConstructorContractResolver : DefaultContractResolver
     {
-        protected override JsonObjectContract CreateObjectContract(Type objectType) =>
-            JsonObjectContractProvider.UsingNonDefaultConstructor(
-                base.CreateObjectContract(objectType),
-                objectType,
-                base.CreateConstructorParameters
-            );
+        //protected override JsonObjectContract CreateObjectContract(Type objectType) =>
+        //    JsonObjectContractProvider.UsingNonDefaultConstructor(
+        //        base.CreateObjectContract(objectType),
+        //        objectType,
+        //        base.CreateConstructorParameters
+        //    );
     }
 
     public static JsonSerializerSettings WithNonDefaultConstructorContractResolver(this JsonSerializerSettings settings)

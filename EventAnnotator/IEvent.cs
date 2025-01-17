@@ -29,5 +29,13 @@
         {
             get;
         }
+
+        // Implement Auditing
+        // ------------------
+        // Who What When Where Why
+        // For reversals etc
+        // - Track User
+
+
     }
 }

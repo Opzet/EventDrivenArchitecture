@@ -17,13 +17,13 @@ namespace OIM.Services
         public void RegisterUser(string username, string email)
         {
             // Create a new UserRegisteredEvent
-            var userRegisteredEvent = new InventoryAdjusted(username, email);
+            //var userRegisteredEvent = new InventoryAdjusted(username, email);
 
-            // Append the event to the event store
-            _eventStore.Append(userRegisteredEvent);
+            //// Append the event to the event store
+            //_eventStore.Append(userRegisteredEvent);
 
-            // Dispatch the event to notify all registered handlers
-            _dispatcher.Dispatch(userRegisteredEvent);
+            //// Dispatch the event to notify all registered handlers
+            //_dispatcher.Dispatch(userRegisteredEvent);
         }
     }
 }

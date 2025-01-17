@@ -14,11 +14,11 @@ namespace Ex3_Invoicing.Infrastructure
         private readonly List<Event> _events = new();
 
         // Append a new event to the store
-        public void Append(T domainEvent)
-        {
-            _events.Add(domainEvent);
-            Console.WriteLine($"Event appended: {domainEvent.GetType().Name}");
-        }
+        //public void Append(T domainEvent)
+        //{
+        //    _events.Add(domainEvent);
+        //    Console.WriteLine($"Event appended: {domainEvent.GetType().Name}");
+        //}
 
         // Retrieve all events as a read-only list
         public IReadOnlyList<Event> GetAllEvents() => _events.AsReadOnly();

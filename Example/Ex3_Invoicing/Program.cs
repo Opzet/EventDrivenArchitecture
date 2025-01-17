@@ -26,13 +26,13 @@ namespace Ex3_Invoicing
                 new Person("Oscar the Grouch", "123 Sesame Street"),
                 DateTime.UtcNow
             );
-            eventStore.Append(invoiceInitiated);
+   //         eventStore.Append(invoiceInitiated);
 
             var invoiceIssued = new InvoiceIssued(
                 "Cookie Monster",
                 DateTime.UtcNow
             );
-            eventStore.Append(invoiceIssued);
+//            eventStore.Append(invoiceIssued);
 
 
             var invoiceSent = new InvoiceSent(
@@ -40,7 +40,7 @@ namespace Ex3_Invoicing
                 DateTime.UtcNow
             );
 
-            eventStore.Append(invoiceSent);
+   //        eventStore.Append(invoiceSent);
 
             // Get all events from the event store
             var events = eventStore.GetAllEvents();
