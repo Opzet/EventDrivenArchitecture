@@ -20,8 +20,8 @@ In contrast to state-oriented persistence models that store only the latest vers
 |----------------------------|-----------------------------------------------|---------------------------------------------|
 | **Data Representation**     | Series of events (immutable)                  | Latest state (mutable)                      |
 | **Data Loss**               | No data is lost, every operation is an event  | Risk of data loss if previous state is not stored |
-| **Auditability**            | Built-in, as events are stored with timestamps | Not naturally supported                     |
-| **Reconstructing State**    | By replaying events in order                  | Not directly supported                       |
+| **Auditability**            | Built-in, as events are stored with timestamps | Not naturally supported      (CDC - Change Data Capture Complexity)                |
+| **Reconstructing State**    | By replaying events in order                  | Not directly supported     Dont know how..                  |
 
 **Eventual consistency** contrasts to traditional **ACID** (atomicity, consistency, isolation, durability).
 If no new updates are made to a given data item, eventually all accesses to that item will return the last updated value.
