@@ -16,7 +16,7 @@ In contrast to state-oriented persistence models that store only the latest vers
 
 ## Event Sourcing vs. Traditional State Storage
 
-| Aspect                     | Event Sourcing                                | Traditional State Persistence                |
+| Aspect                     | Event Sourcing   (Transactions-> Render Balance)      |  Traditional State Persistence  (CRUD - Atomic Value))      |
 |----------------------------|-----------------------------------------------|---------------------------------------------|
 | **Data Representation**     | Series of events (immutable)                  | Latest state (mutable)                      |
 | **Data Loss**               | No data is lost, every operation is an event  | Risk of data loss if previous state is not stored |
